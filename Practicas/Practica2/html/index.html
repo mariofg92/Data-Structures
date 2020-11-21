@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>priority_queue: Priority Queue</title>
+
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">priority_queue
+   
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generado por Doxygen 1.7.5 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li class="current"><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="annotated.html"><span>Clases</span></a></li>
+      <li><a href="files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">Priority Queue </div>  </div>
+</div>
+<div class="contents">
+<div class="textblock"><dl class="version"><dt><b>Versión:</b></dt><dd>v0 </dd></dl>
+<dl class="author"><dt><b>Autor:</b></dt><dd>Estructuras de Datos</dd></dl>
+<h2><a class="anchor" id="intro_sec"></a>
+Introduccion</h2>
+<p>En esta practica se pretende avanzar en el uso de las estructuras de datos, para ello comenzaremos con un tipo de datos simplificado que llamaremos <a class="el" href="classpriority__queue.html">priority_queue</a>.</p>
+<p>Una <a class="el" href="classpriority__queue.html">priority_queue</a> (cola_con_prioridad) es un contenedor que proporciona un subconjunto restringido de métodos (inserción de elementos además del borrado y consulta del elemento “mayor”). Se garantiza que el elemento “mayor” de la <a class="el" href="classpriority__queue.html">priority_queue</a> se encuentra en el tope de la misma. Priority_queue no permite la iteración a través de sus elementos.</p>
+<h2><a class="anchor" id="example_sec"></a>
+Ejemplo de Uso:</h2>
+<div class="fragment"><pre class="fragment"><span class="preprocessor">#include &quot;priority_queue.h&quot;</span>
+
+<a class="code" href="classpriority__queue.html">priority_queue&lt;int&gt;</a> q1;
+
+
+<span class="keywordflow">for</span> (i=1;i&lt;10;i++) q1.<a class="code" href="classpriority__queue.html#a5752a7481aec928da27e13fa9a51479d" title="insertar Añade el elemento al priority_queue">push</a>(i);
+
+<span class="keywordflow">for</span> (i=20;i&gt;11;i--) q1.<a class="code" href="classpriority__queue.html#a5752a7481aec928da27e13fa9a51479d" title="insertar Añade el elemento al priority_queue">push</a>(i);
+
+<span class="keywordflow">while</span> (!q1.<a class="code" href="classpriority__queue.html#a48a3f0d42865aca9ccba2309548546ad" title="vacia Chequea si el priority_queue esta vacio (size()==0)">empty</a>())  { <span class="comment">// Imprime los números del 20 al 1. </span>
+     cout &lt;&lt; q1.<a class="code" href="classpriority__queue.html#a26f6bc4aa3c9fca723cd0f084a8e7b78" title="tope de la cola Se garantiza que el elemento en el tope es el elemento más grande de la cola con prio...">top</a>() &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;
+     q1.<a class="code" href="classpriority__queue.html#a1f7659b60842178f0ac5480ae573f643" title="sacar Saca el elemento al tope del priority_queue">pop</a>();   
+   }
+</pre></div><h2><a class="anchor" id="Representaciones"></a>
+Representaciones</h2>
+<p>El alumno deberá realizar dos implementaciones distintas de una cola con prioridad, utilizando como base el TDA vector de la STL, en la primera de ellas los elementos se almacenarán sin tener en cuenta su valor mientras que en la segunda debemos garantizar que los elementos se encuentran ordenados en el vector</p>
+<h2><a class="anchor" id="primera"></a>
+Primera Representación:</h2>
+<h3><a class="anchor" id="fact_sec1"></a>
+Función de Abstracción :</h3>
+<p>Funcion de Abstraccion: AF: Rep =&gt; Abs</p>
+<p>dada qq=(vector&lt;T&gt; V, int mayor) ==&gt; <a class="el" href="classpriority__queue.html">priority_queue</a> PQ;</p>
+<p>Un objeto abstracto, Q, se instancia en la cola con prioridad pq teniendo:</p>
+<div class="fragment"><pre class="fragment"> pq.V[mayor] = PQ.top()
+</pre></div><h3><a class="anchor" id="inv_sec1"></a>
+Invariante de la Representación:</h3>
+<p>Propiedades que debe cumplir cualquier objeto</p>
+<div class="fragment"><pre class="fragment">pq.size() == pq.V.size();
+
+Para todo i, 0 &lt;= i &lt; pq.V.size() se cumple
+pq.V[mayor] &gt;= pq.V[i];
+</pre></div><h2><a class="anchor" id="segunda"></a>
+Segunda Representación:</h2>
+<p>En este caso, la representación que se utiliza es un vector ordenado de elementos </p>
+<h3><a class="anchor" id="fact_sec2"></a>
+Función de Abstracción :</h3>
+<p>Funcion de Abstraccion: AF: Rep =&gt; Abs</p>
+<p>dada qq=(vector&lt;T&gt; V) ==&gt; <a class="el" href="classpriority__queue.html">priority_queue</a> PQ;</p>
+<p>Un objeto abstracto, Q, se instancia en la cola con prioridad pq teniendo:</p>
+<div class="fragment"><pre class="fragment"> pq.V[0] = PQ.top()
+</pre></div><h3><a class="anchor" id="inv_sec2"></a>
+Invariante de la Representación:</h3>
+<p>Propiedades que debe cumplir cualquier objeto</p>
+<div class="fragment"><pre class="fragment">pq.size() == pq.V.size();
+
+Para todo i, 0 &lt;= i &lt; pq.V.size()-1 se cumple
+pq.V[i] &gt;= pq.V[i+1];
+</pre></div> <h2><a class="anchor" id="sec_tar"></a>
+Tareas a Realizar.</h2>
+<p>Se pide implementar las dos representaciones del TDA <a class="el" href="classpriority__queue.html">priority_queue</a> y analizar la eficiencia del siguiente código que permite ordenar un vector de elementos.</p>
+<p>Para ello se puede utilizar el código que se ha proporcionado en la práctica 1.</p>
+<div class="fragment"><pre class="fragment"><span class="comment">// Ordena un vector de string en orden creciente </span>
+<span class="comment">//@param[in,out] V vector a ordenar</span>
+<span class="comment">//</span>
+<span class="keywordtype">void</span> ordenar(vector&lt;string&gt; &amp; V){
+
+ <a class="code" href="classpriority__queue.html">priority_queue</a> aux;
+ <span class="keywordtype">int</span> pos;
+
+ <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0;i&lt;V.size(); i++)
+   aux.<a class="code" href="classpriority__queue.html#a5752a7481aec928da27e13fa9a51479d" title="insertar Añade el elemento al priority_queue">push</a>(V[i]);
+
+ pos = V.size()-1;
+ <span class="keywordflow">while</span> (!aux.<a class="code" href="classpriority__queue.html#a48a3f0d42865aca9ccba2309548546ad" title="vacia Chequea si el priority_queue esta vacio (size()==0)">empty</a>()) {
+   V[pos]=aux.<a class="code" href="classpriority__queue.html#a26f6bc4aa3c9fca723cd0f084a8e7b78" title="tope de la cola Se garantiza que el elemento en el tope es el elemento más grande de la cola con prio...">top</a>();
+   aux.<a class="code" href="classpriority__queue.html#a1f7659b60842178f0ac5480ae573f643" title="sacar Saca el elemento al tope del priority_queue">pop</a>();
+   pos--;
+ }
+}
+</pre></div> </div></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Todo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Clases</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Funciones</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>&apos;typedefs&apos;</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+
+
+<hr class="footer"/><address class="footer"><small>
+Generado el Lunes, 22 de Octubre de 2012 14:54:32 para priority_queue por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.5
+</small></address>
+
+</body>
+</html>

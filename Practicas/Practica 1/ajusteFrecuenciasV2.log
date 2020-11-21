@@ -1,0 +1,43 @@
+
+
+*******************************************************************************
+Sat Oct 27 22:26:26 2012
+
+
+FIT:    data read from 'frecuenciasV2.dat'
+        format = z
+        #datapoints = 40
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 0.562839          delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 6.97602e+06
+
+initial set of free parameter values
+
+a               = 1.89402e-08
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 2.76178e-05
+rel. change during last iteration : -7.57301e-07
+
+degrees of freedom    (FIT_NDF)                        : 39
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000841516
+variance of residuals (reduced chisquare) = WSSR/ndf   : 7.08149e-07
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 1.93651e-09      +/- 1.907e-11    (0.9849%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 

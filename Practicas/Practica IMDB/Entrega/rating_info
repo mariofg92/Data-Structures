@@ -1,0 +1,31 @@
+
+REPORT FORMAT
+=============
+
+     In this list, movies have been rated on a scale of 1 to 10, 10 being
+good and 1 being bad.  For each movie, the total number of votes, the
+average rating, and the vote distribution are shown.  New movies are indicated
+by a "*" before their entry.
+
+     The vote distribution uses a single character to represent the percentage
+of votes for each ranking.  The following characters codes can appear:
+
+     "." no votes cast        "3" 30-39% of the votes  "7" 70-79% of the votes
+     "0"  1-9%  of the votes  "4" 40-49% of the votes  "8" 80-89% of the votes
+     "1" 10-19% of the votes  "5" 50-59% of the votes  "9" 90-99% of the votes
+     "2" 20-29% of the votes  "6" 60-69% of the votes  "*" 100%   of the votes
+
+TOP 250 MOVIES (25000+ VOTES)
+
+The formula used to calculate the top 250 movies is:
+
+  weighted rank = (v/(v+k))*X + (k/(v+k))*C
+
+  where:
+
+    X = average for the movie (mean)
+    v = number of votes for the movie
+    k = minimum votes required to be listed in the top 250 (currently 25000)
+    C = the mean vote across the whole report (currently 6.90)
+
+

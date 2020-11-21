@@ -1,0 +1,181 @@
+/*! \mainpage  IMDB
+ *
+\version v0
+\author  Estructuras de Datos
+
+ * \section intro_sec Introduccion
+ *
+ * 
+En esta practica se pretende avanzar en el uso de las estructuras de datos, pero acercandonos a un problema real (aunque simplificado). 
+
+En concreto se pretende diseñar un tda capaz de gestionar la base de datos de votos en Internet Movie Database (IMDb). En esta base, se tiene para cada pelicula la siguiente informacion:
+
+
+\code
+REPORT FORMAT : Distribution  Votes  Rank  Title Year Other
+=============
+
+For example
+
+Distribution  Votes  Rank  Title Year Other
+0000012101 294303 6.5 Star Wars: Episode I - The Phantom Menace  (1999)      
+
+     In this list, movies have been rated on a scale of 1 to 10, 10 being
+good and 1 being bad.  For each movie, the total number of votes, the
+average rating, and the vote distribution are shown.  New movies are indicated
+by a "*" before their entry.
+
+     The vote distribution uses a single character to represent the percentage
+of votes for each ranking.  The following characters codes can appear:
+
+     "." no votes cast        "3" 30-39% of the votes  "7" 70-79% of the votes
+     "0"  1-9%  of the votes  "4" 40-49% of the votes  "8" 80-89% of the votes
+     "1" 10-19% of the votes  "5" 50-59% of the votes  "9" 90-99% of the votes
+     "2" 20-29% of the votes  "6" 60-69% of the votes  "*" 100%   of the votes
+
+
+
+\endcode
+
+Para ello, se dispone de la estructura movie que nos permite recoger toda la informacion de una pelicula
+
+\code
+struct movie{
+ string distr;
+ int votos;  
+ float media;
+ string anio;
+ string nombre;
+ string otra;
+ };
+
+\endcode
+
+\section Representaciones
+
+El alumno deberá realizar dos implementaciones distintas de la base de datos:
+En la primera de ellas utilizando como base el TDA vector de la STL, donde se debe  garantizar que los elementos se encuentran ordenados en el vector
+
+\section primera Primera Representación:
+
+En este caso, la representación que se utiliza es un vector ordenado de movie 
+
+\subsection fact_sec1 Función de Abstracción :
+
+
+
+Funcion de Abstraccion:
+AF: Rep => Abs
+   
+  dada I (vector<movie> datos, set< vector<movie>::const_iterator > borrados 
+
+Donde 
+- datos:  almacena las peliculas.
+- borrados: posiciones borradas
+  
+ 
+  
+Un objeto abstracto, IMDb, se instancia en la clase imdb:
+
+\code
+  (datos, borrados) ==> imbd, donde las posiciones en borradas no son películas válidas
+\endcode
+ 
+\subsection inv_sec1 Invariante de la Representación:
+
+
+Propiedades que debe cumplir cualquier objeto 
+
+\code
+
+
+Invariante de la Representación:
+
+
+Propiedades que debe cumplir cualquier objeto 
+
+
+- it representa a una posición valida (pelicula en imdb) sii el borrados.find(it) == borrados.end(), esto es  no pertenece a la lista de borrados
+
+-  I.size() = I.imdb.size()-borrados.size();  
+ 
+
+
+- Hay que tener en cuenta que el nombre de la película se puede repetir
+(aunque en el mismo año sólo habría una con un mismo tìtulo).
+
+- en el vector de datos no puede haber dos peliculas iguales que sean simultaneamente válidas.
+
+
+\endcode
+
+\section segunda Segunda Representación:
+
+Se entregará la semana próxima 
+
+\section inser Insercion y Borrado en IMDb
+
+- Borrado: Dado que el número de borrados no es muy alto, las operaciones de borrado son lógicas (no implican desplazamientos de movie en el vector de datos (por tanto no invalida iteradores). Sólo se inserta la posicion dentro de la lista de borrados
+
+- Insercion: A la hora de insertar se comprueba que hay un hueco (pelicula borrada anteriormente). Si es cierto, la nueva pelicula ocupa la posicion borrada, si no es asi, se inserta como un nuevo dato en el vector.
+
+Ejemplo
+
+datos = [a,z,-,d,f,-,-,g,e] borrados = <2,5,6>
+
+Al insertar el elemento s  el vector quedaría como
+
+datos = [a,z,s,d,f,-,-,g,e] borrados = <5,6>
+
+\section calculo Cálculo de los Top-K
+
+El método \verb+void topK( int k, vector<movie> & tk, string & year=string() ) const;+ será el encargado de calcular las k mejores películas según valoración de todos los tiempos (en el caso en que year sea igual al string por defecto) o bien nos permite centrarnos en las mejores películas de un determinado año, por ejemplo la llamada topK(50, "1990") devolvería las 50 mejores películas de ese año. 
+
+Es importante tener en cuenta que en IMDb el número mínimo de votos necesarios para que una película se encuentre entre las K mejores es de 25000. 
+
+Una alternativa para calcular este listado consiste en ordenar todas las películar por valoración y seleccionar las K mejores. Este proceso se puede realizar en O(n log n), siendo n el número de películas. Sin embargo, este proceso se puede mejorar considerablemente.  La idea es utilizar una cola con prioridad asegurándonos que el elemento que está en el tope de la cola es el de menor valoración.
+
+Inicialmente, la cola con prioridad se rellena con las K primeras películas. Una vez que está completa, se procede a evaluar el resto de las películas una a una de tal forma que si la valoración de la nueva película es menor que la que está en el tope de la cola sabemos que no forma parte del conjunto buscado, y por tanto se descarta. Sin embargo, si la valoración es mejor que la del tope podemos eliminar esta última del conjunto de las K mejores e insertar la nueva película. 
+
+Una vez terminado, tendremos en la cola con prioridad las K mejores películas, y se puede generar el listado en el orden correcto, todo este proceso se puede realizar en O(n log k), pero como K suele ser pequeño con respecto al valor de n, lo podremos despreciar. La ventaja de utilizar esta aproximación es considerable. Así por ejemplo, si consideramos todas las películas del conjunto de datos pasamos de necesitar 500000 ciclos cuando utilizamos el algoritmo de ordenación a sólo 10000. 
+
+
+
+\section ficheros Ficheros que se entregan 
+
+Descripcion de ficheros
+
+- codigo_prueba.cpp  
+
+	 Fichero con codigo para lectura de base de datos.
+- imdb.h 
+
+	Fichero de especificacion de la clase imdb
+
+- imdb.cpp 
+
+Fichero de implementacion de la clase imdb
+
+- P5_file_rating.list 
+
+	Fichero con 200000 peliculas con sus respectivos ratings. Este fichero es el que debemos de utilizar
+ para construir inicialmente la estructura.
+
+- P5_insert_rating.list
+
+        Fichero con 96498 peliculas que se deberán insertar posteriormente en la estructura.
+
+- P5_delete_rating.list 
+
+	Fichero con 70000 peliculas que se deberán borrar.
+ Estas peliculas pertenecen al total de 296498 peliculas entregadas.
+
+- rating_info
+
+	Fichero con informacion sobre la forma en que IMDb computa los ratings y almacena los votos.
+
+\section sec_tar Tareas a Realizar. 
+Se pide implementar las dos representaciones del TDA imdb
+
+
+ */

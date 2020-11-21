@@ -1,0 +1,244 @@
+\hypertarget{classpriority__queue}{
+\section{\-Referencia de la \-Clase priority\-\_\-queue}
+\label{classpriority__queue}\index{priority\-\_\-queue@{priority\-\_\-queue}}
+}
+
+
+{\ttfamily \#include $<$priority\-\_\-queue.\-h$>$}
+
+\subsection*{\-Tipos públicos}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned int \hyperlink{classpriority__queue_ab93fe794e0660e6e882a859f05537ba4}{size\-\_\-type}
+\end{DoxyCompactItemize}
+\subsection*{\-Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classpriority__queue_a48a3f0d42865aca9ccba2309548546ad}{empty} () const 
+\begin{DoxyCompactList}\small\item\em vacia \-Chequea si el \hyperlink{classpriority__queue}{priority\-\_\-queue} esta vacio (\hyperlink{classpriority__queue_aa2eac4c0e3bc1f5e138c198236305bf8}{size()}==0) \end{DoxyCompactList}\item 
+\hyperlink{classpriority__queue}{priority\-\_\-queue}$<$ \-T $>$ \& \hyperlink{classpriority__queue_a8fd99c9dc04de22c8f85b079c1cf4c77}{operator=} (const \hyperlink{classpriority__queue}{priority\-\_\-queue}$<$ \-T $>$ \&org)
+\begin{DoxyCompactList}\small\item\em operador de asignación \end{DoxyCompactList}\item 
+void \hyperlink{classpriority__queue_a1f7659b60842178f0ac5480ae573f643}{pop} ()
+\begin{DoxyCompactList}\small\item\em sacar \-Saca el elemento al tope del \hyperlink{classpriority__queue}{priority\-\_\-queue} \end{DoxyCompactList}\item 
+\hyperlink{classpriority__queue_afd661f4b9ebfca580d847bc6e1c90fd5}{priority\-\_\-queue} ()
+\begin{DoxyCompactList}\small\item\em \-Constructor primitivo. \end{DoxyCompactList}\item 
+\hyperlink{classpriority__queue_a6633a17cde10a7cad0677219ee514a63}{priority\-\_\-queue} (const \hyperlink{classpriority__queue}{priority\-\_\-queue}$<$ \-T $>$ \&org)
+\begin{DoxyCompactList}\small\item\em \-Constructor de copia. \end{DoxyCompactList}\item 
+void \hyperlink{classpriority__queue_a5752a7481aec928da27e13fa9a51479d}{push} (const \-T \&t)
+\begin{DoxyCompactList}\small\item\em insertar \-Añade el elemento al \hyperlink{classpriority__queue}{priority\-\_\-queue} \end{DoxyCompactList}\item 
+\hyperlink{classpriority__queue_ab93fe794e0660e6e882a859f05537ba4}{size\-\_\-type} \hyperlink{classpriority__queue_aa2eac4c0e3bc1f5e138c198236305bf8}{size} () const 
+\begin{DoxyCompactList}\small\item\em tamaño \-Devuelve el numero de elementos en el \hyperlink{classpriority__queue}{priority\-\_\-queue} \end{DoxyCompactList}\item 
+const \-T \& \hyperlink{classpriority__queue_a26f6bc4aa3c9fca723cd0f084a8e7b78}{top} () const 
+\begin{DoxyCompactList}\small\item\em tope de la cola \-Se garantiza que el elemento en el tope es el elemento más grande de la cola con prioridad, según determina el criterio de comparación. \end{DoxyCompactList}\item 
+\hyperlink{classpriority__queue_acac385c42d343b59620372f681696d8d}{$\sim$priority\-\_\-queue} ()
+\begin{DoxyCompactList}\small\item\em \-Destructor. \-Destruye el receptor liberando los recursos que ocupaba. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Descripción detallada}
+prioirty\-\_\-queue$<$\-T$>$
+
+prioirty\-\_\-queue$<$\-T$>$\-:\-: \hyperlink{classpriority__queue}{priority\-\_\-queue}, size, capacity, empty, push, pop, top, operator=
+
+\-Descripción
+
+\-Una \hyperlink{classpriority__queue}{priority\-\_\-queue} (cola\-\_\-con\-\_\-prioridad) es un contenedor que proporciona un subconjunto restringido de métodos (inserción de elementos además del borrado y consulta del elemento “mayor”). \-Se garantiza que el elemento “mayor” de la \hyperlink{classpriority__queue}{priority\-\_\-queue} se encuentra en el tope de la misma. \-Priority\-\_\-queue no permite la iteración a través de sus elementos.
+
+\-El número de elementos en el \hyperlink{classpriority__queue}{priority\-\_\-queue} puede variar dinámicamente; la gestión de la memoria es automática. 
+
+\subsection{\-Documentación de los '\-Typedef' miembros de la clase}
+\hypertarget{classpriority__queue_ab93fe794e0660e6e882a859f05537ba4}{
+\index{priority\-\_\-queue@{priority\-\_\-queue}!size\-\_\-type@{size\-\_\-type}}
+\index{size\-\_\-type@{size\-\_\-type}!priority_queue@{priority\-\_\-queue}}
+\subsubsection[{size\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf priority\-\_\-queue\-::size\-\_\-type}}}
+\label{classpriority__queue_ab93fe794e0660e6e882a859f05537ba4}
+\-Hace referencia al tipo asociado al tamaño de la cola con prioridad 
+
+\subsection{\-Documentación del constructor y destructor}
+\hypertarget{classpriority__queue_afd661f4b9ebfca580d847bc6e1c90fd5}{
+\index{priority\-\_\-queue@{priority\-\_\-queue}!priority\-\_\-queue@{priority\-\_\-queue}}
+\index{priority\-\_\-queue@{priority\-\_\-queue}!priority_queue@{priority\-\_\-queue}}
+\subsubsection[{priority\-\_\-queue}]{\setlength{\rightskip}{0pt plus 5cm}priority\-\_\-queue\-::priority\-\_\-queue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classpriority__queue_afd661f4b9ebfca580d847bc6e1c90fd5}
+
+
+\-Constructor primitivo. 
+
+\-Funcion de \-Abstraccion\-: \-A\-F\-: \-Rep =$>$ \-Abs
+
+dada qq=(vector$<$\-T$>$ \-V, int mayor) ==$>$ \hyperlink{classpriority__queue}{priority\-\_\-queue} \-P\-Q;
+
+\-Un objeto abstracto, \-Q, se instancia en la cola con prioridad pq teniendo\-:
+
+pq.\-V\mbox{[}mayor\mbox{]} = \-P\-Q.\-top()
+
+\-Invariante de la \-Representación\-:
+
+\-Propiedades que debe cumplir cualquier objeto \hyperlink{classpriority__queue}{priority\-\_\-queue} pq.\-size() == pq.\-V.\-size();
+
+\-Para todo i, 0 $<$= i $<$ pq.\-V.\-size() se cumple pq.\-V\mbox{[}mayor\mbox{]} $>$= pq.\-V\mbox{[}i\mbox{]}; \begin{DoxyRefDesc}{\-Tareas pendientes}
+\item[\hyperlink{todo__todo000001}{\-Tareas pendientes}]implementa esta función \end{DoxyRefDesc}
+\hypertarget{classpriority__queue_a6633a17cde10a7cad0677219ee514a63}{
+\index{priority\-\_\-queue@{priority\-\_\-queue}!priority\-\_\-queue@{priority\-\_\-queue}}
+\index{priority\-\_\-queue@{priority\-\_\-queue}!priority_queue@{priority\-\_\-queue}}
+\subsubsection[{priority\-\_\-queue}]{\setlength{\rightskip}{0pt plus 5cm}priority\-\_\-queue\-::priority\-\_\-queue (
+\begin{DoxyParamCaption}
+\item[{const {\bf priority\-\_\-queue}$<$ \-T $>$ \&}]{org}
+\end{DoxyParamCaption}
+)}}
+\label{classpriority__queue_a6633a17cde10a7cad0677219ee514a63}
+
+
+\-Constructor de copia. 
+
+
+\begin{DoxyParams}[1]{\-Parámetros}
+\mbox{\tt in}  & {\em org} & \hyperlink{classpriority__queue}{priority\-\_\-queue} que se copia\\
+\hline
+\end{DoxyParams}
+\-Crea un \hyperlink{classpriority__queue}{priority\-\_\-queue} duplicado exacto de org.
+
+\begin{DoxyRefDesc}{\-Tareas pendientes}
+\item[\hyperlink{todo__todo000002}{\-Tareas pendientes}]implementa esta función \end{DoxyRefDesc}
+\hypertarget{classpriority__queue_acac385c42d343b59620372f681696d8d}{
+\index{priority\-\_\-queue@{priority\-\_\-queue}!$\sim$priority\-\_\-queue@{$\sim$priority\-\_\-queue}}
+\index{$\sim$priority\-\_\-queue@{$\sim$priority\-\_\-queue}!priority_queue@{priority\-\_\-queue}}
+\subsubsection[{$\sim$priority\-\_\-queue}]{\setlength{\rightskip}{0pt plus 5cm}priority\-\_\-queue\-::$\sim$priority\-\_\-queue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classpriority__queue_acac385c42d343b59620372f681696d8d}
+
+
+\-Destructor. \-Destruye el receptor liberando los recursos que ocupaba. 
+
+\begin{DoxyRefDesc}{\-Tareas pendientes}
+\item[\hyperlink{todo__todo000003}{\-Tareas pendientes}]implementa esta función \end{DoxyRefDesc}
+
+
+\subsection{\-Documentación de las funciones miembro}
+\hypertarget{classpriority__queue_a48a3f0d42865aca9ccba2309548546ad}{
+\index{priority\-\_\-queue@{priority\-\_\-queue}!empty@{empty}}
+\index{empty@{empty}!priority_queue@{priority\-\_\-queue}}
+\subsubsection[{empty}]{\setlength{\rightskip}{0pt plus 5cm}bool priority\-\_\-queue\-::empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}
+\label{classpriority__queue_a48a3f0d42865aca9ccba2309548546ad}
+
+
+vacia \-Chequea si el \hyperlink{classpriority__queue}{priority\-\_\-queue} esta vacio (\hyperlink{classpriority__queue_aa2eac4c0e3bc1f5e138c198236305bf8}{size()}==0) 
+
+\begin{DoxyRefDesc}{\-Tareas pendientes}
+\item[\hyperlink{todo__todo000005}{\-Tareas pendientes}]implementa esta función \end{DoxyRefDesc}
+\hypertarget{classpriority__queue_a8fd99c9dc04de22c8f85b079c1cf4c77}{
+\index{priority\-\_\-queue@{priority\-\_\-queue}!operator=@{operator=}}
+\index{operator=@{operator=}!priority_queue@{priority\-\_\-queue}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf priority\-\_\-queue}$<$ \-T $>$ \& priority\-\_\-queue\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf priority\-\_\-queue}$<$ \-T $>$ \&}]{org}
+\end{DoxyParamCaption}
+)}}
+\label{classpriority__queue_a8fd99c9dc04de22c8f85b079c1cf4c77}
+
+
+operador de asignación 
+
+
+\begin{DoxyParams}[1]{\-Parámetros}
+\mbox{\tt in}  & {\em org} & \hyperlink{classpriority__queue}{priority\-\_\-queue} a copiar. \-Crea un \hyperlink{classpriority__queue}{priority\-\_\-queue} duplicado exacto de org.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{\-Tareas pendientes}
+\item[\hyperlink{todo__todo000009}{\-Tareas pendientes}]implementa esta función \end{DoxyRefDesc}
+\hypertarget{classpriority__queue_a1f7659b60842178f0ac5480ae573f643}{
+\index{priority\-\_\-queue@{priority\-\_\-queue}!pop@{pop}}
+\index{pop@{pop}!priority_queue@{priority\-\_\-queue}}
+\subsubsection[{pop}]{\setlength{\rightskip}{0pt plus 5cm}void priority\-\_\-queue\-::pop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{classpriority__queue_a1f7659b60842178f0ac5480ae573f643}
+
+
+sacar \-Saca el elemento al tope del \hyperlink{classpriority__queue}{priority\-\_\-queue} 
+
+\begin{DoxyPrecond}{\-Precondición}
+\hyperlink{classpriority__queue_a48a3f0d42865aca9ccba2309548546ad}{empty()} == false; 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{\-Postcondición}
+el \hyperlink{classpriority__queue_aa2eac4c0e3bc1f5e138c198236305bf8}{size()} será decrementado en 1.
+\end{DoxyPostcond}
+\begin{DoxyRefDesc}{\-Tareas pendientes}
+\item[\hyperlink{todo__todo000008}{\-Tareas pendientes}]implementa esta función \end{DoxyRefDesc}
+\hypertarget{classpriority__queue_a5752a7481aec928da27e13fa9a51479d}{
+\index{priority\-\_\-queue@{priority\-\_\-queue}!push@{push}}
+\index{push@{push}!priority_queue@{priority\-\_\-queue}}
+\subsubsection[{push}]{\setlength{\rightskip}{0pt plus 5cm}void priority\-\_\-queue\-::push (
+\begin{DoxyParamCaption}
+\item[{const \-T \&}]{t}
+\end{DoxyParamCaption}
+)}}
+\label{classpriority__queue_a5752a7481aec928da27e13fa9a51479d}
+
+
+insertar \-Añade el elemento al \hyperlink{classpriority__queue}{priority\-\_\-queue} 
+
+
+\begin{DoxyParams}[1]{\-Parámetros}
+\mbox{\tt in}  & {\em t} & elemento a insertar en la cola \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{\-Postcondición}
+el \hyperlink{classpriority__queue_aa2eac4c0e3bc1f5e138c198236305bf8}{size()} será incrementado en 1.
+\end{DoxyPostcond}
+\begin{DoxyRefDesc}{\-Tareas pendientes}
+\item[\hyperlink{todo__todo000007}{\-Tareas pendientes}]implementa esta función \end{DoxyRefDesc}
+\hypertarget{classpriority__queue_aa2eac4c0e3bc1f5e138c198236305bf8}{
+\index{priority\-\_\-queue@{priority\-\_\-queue}!size@{size}}
+\index{size@{size}!priority_queue@{priority\-\_\-queue}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf priority\-\_\-queue}$<$ \-T $>$\-::{\bf size\-\_\-type} priority\-\_\-queue\-::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}
+\label{classpriority__queue_aa2eac4c0e3bc1f5e138c198236305bf8}
+
+
+tamaño \-Devuelve el numero de elementos en el \hyperlink{classpriority__queue}{priority\-\_\-queue} 
+
+\begin{DoxyRefDesc}{\-Tareas pendientes}
+\item[\hyperlink{todo__todo000004}{\-Tareas pendientes}]implementa esta función \end{DoxyRefDesc}
+\hypertarget{classpriority__queue_a26f6bc4aa3c9fca723cd0f084a8e7b78}{
+\index{priority\-\_\-queue@{priority\-\_\-queue}!top@{top}}
+\index{top@{top}!priority_queue@{priority\-\_\-queue}}
+\subsubsection[{top}]{\setlength{\rightskip}{0pt plus 5cm}const \-T \& priority\-\_\-queue\-::top (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}
+\label{classpriority__queue_a26f6bc4aa3c9fca723cd0f084a8e7b78}
+
+
+tope de la cola \-Se garantiza que el elemento en el tope es el elemento más grande de la cola con prioridad, según determina el criterio de comparación. 
+
+\begin{DoxyPrecond}{\-Precondición}
+\hyperlink{classpriority__queue_a48a3f0d42865aca9ccba2309548546ad}{empty()} == false; 
+\end{DoxyPrecond}
+\begin{DoxyReturn}{\-Devuelve}
+\-Devuelve una referencia al elemento en el tope del \hyperlink{classpriority__queue}{priority\-\_\-queue}
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{\-Tareas pendientes}
+\item[\hyperlink{todo__todo000006}{\-Tareas pendientes}]implementa esta función \end{DoxyRefDesc}
+
+
+\-La documentación para esta clase fue generada a partir de los siguientes ficheros\-:\begin{DoxyCompactItemize}
+\item 
+priority\-\_\-queue.\-h\item 
+priority\-\_\-queue\-\_\-v0.\-hxx\end{DoxyCompactItemize}

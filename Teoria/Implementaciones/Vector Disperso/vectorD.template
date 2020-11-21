@@ -1,0 +1,290 @@
+/***************************************************************************/
+
+#include <assert.h> 
+
+template <typename TIPO>
+vectorD<TIPO>::vectorD( const TIPO & t  ) {
+   v_nulo = t;
+   n_ele = 0;
+}
+    
+template <typename TIPO>    
+vectorD<TIPO>::vectorD( const vectorD & b) {
+ /** constructor primitivo que hace una copia del vector disperso b. */
+	  v_nulo = b.v_nulo;
+	  vd = b.vd;
+	  n_ele = b.n_ele;
+	}
+	
+template <typename TIPO>
+vectorD<TIPO>::vectorD( int numcomp, const TIPO & t  ) {
+ /** constructor que crea un vectorD con numcomp componentes, todas ellas iguales a t. numcomp deve ser mayor que cero. */
+ 
+   v_nulo = t;
+   n_ele = numcomp;
+   cout << checkRep() << endl;
+}
+
+template <typename TIPO>
+int vectorD<TIPO>::checkRep() {
+  if ( (n_ele < 0 ) || (vd.size() > n_ele) ) return 1;
+  for (int i = 0; i<vd.size() ; i++){
+    if (vd[i].second == v_nulo) return 2;
+    if (vd[i].first < 0) return 3;
+    if (i<vd.size() -1)
+      if (vd[i].first >= vd[i+1].first) return 4;
+  }
+  return 0;
+}
+
+template <typename TIPO>
+void vectorD<TIPO>::assign(int p, const TIPO & t){
+ 
+  assert(p < n_ele);
+  
+  pair<int, TIPO> valor(p,t);
+  int i;
+  for (i=0; i<vd.size() && vd[i].first <p ; i++);
+  
+  if (i == vd.size()) {
+    if (t!= v_nulo)
+     vd.push_back(valor);
+  }
+  else if (p==vd[i].first) {
+     if (t!= v_nulo)  vd[i].second = t;
+     else vd.erase(vd.begin()+i);
+  }
+  else { 
+    vd.insert(vd.begin()+i, valor);
+  }
+  
+}
+
+template <typename TIPO>
+vectorD<TIPO> & vectorD<TIPO>::operator= (const vectorD<TIPO> & x) {
+if (this!= &x) {
+   vd =x.vd;
+   n_ele = x.n_ele;
+   v_nulo =x.v_nulo;
+  }
+return *this;
+}
+
+template <typename TIPO>
+bool vectorD<TIPO>::operator== (const vectorD<TIPO> & x) {
+if (n_ele != x.n_ele) return false;
+else if (v_nulo != x.v_nulo) return false;
+else if (vd != x.vd) return false;
+else return true;
+}
+
+template <typename TIPO>
+bool vectorD<TIPO>::operator!= (const vectorD<TIPO> & x) {
+ return !((*this) == x);
+}
+
+template <typename TIPO>
+int vectorD<TIPO>::size() const {
+  return n_ele;
+}
+
+template <typename TIPO>
+void vectorD<TIPO>::push_back( const TIPO & t){
+/* Inserta un elemento al final del vectorD */
+if (t!=v_nulo){
+  pair<int,TIPO> n;
+  n.first=n_ele;
+  n.second=t;
+  vd.push_back(n);
+  }
+n_ele++;
+}
+
+template <typename TIPO>
+void vectorD<TIPO>::pop_back()
+/* elimina el último elemento del vector */
+{
+if(vd[vd.size()-1].first==n_ele-1)
+vd.pop_back();
+n_ele--;
+}
+
+template <typename TIPO>
+TIPO vectorD<TIPO>::v_default( ) const {
+ return v_nulo;
+ }
+
+template <typename TIPO>
+void vectorD<TIPO>::clear() {
+/*ELIMINA LOS ELEMENTOS DEL VECTOR DISPERSO*/
+vd.clear ();
+n_ele = 0;
+} 
+
+template <typename TIPO>
+ vectorD<TIPO>::~vectorD() {
+   // el propio sistema se encarga de llamar al destructor del vector de datos vd		
+}
+  	
+  	
+template <typename TIPO>
+void vectorD<TIPO>::resize(int s){
+typename vector<pair<int,TIPO> >::iterator it;
+   if (s<n_ele){
+     it = vd.begin();
+     while (it!=vd.end() && (*it).first < s)
+         it++;
+     vd.erase(it,vd.end());
+   }
+  n_ele = s;   
+}  
+
+template <typename TIPO>
+const TIPO & vectorD<TIPO>::operator[](int p)  const
+/** devuelve la componente p-esima del vextor. Siendo p mayor o igual que 0 y menor  que n_ele*/
+{
+	
+   int i;
+   if ( vd.empty() ) 
+     return v_nulo;
+   else {
+    for ( i=0; i<vd.size() && vd[i].first <p ; i++);
+    if (p==vd[i].first) 
+     return vd[i].second;
+    else return v_nulo;
+   }
+}
+
+template <typename TIPO>
+const TIPO & vectorD<TIPO>::at(int p)  const
+/** devuelve la componente p-esima del vextor. 
+Siendo p mayor o igual que 0 y menor que n_ele*/
+{
+	
+   int i;
+   assert ( (p>=0) && (p<n_ele) );
+   if ( vd.empty() ) 
+     return v_nulo;
+   else {
+    for ( i=0; i<vd.size() && vd[i].first <p ; i++);
+    if (p==vd[i].first) 
+     return vd[i].second;
+    else return v_nulo;
+   }
+}
+
+template <typename TIPO>
+typename vectorD<TIPO>::const_iteratorD vectorD<TIPO>::beginD() const {
+  typename vectorD<TIPO>::const_iteratorD aux;
+  aux.ite = vd.begin();
+  return aux;
+}
+
+template <typename TIPO>
+typename vectorD<TIPO>::const_iteratorD vectorD<TIPO>::endD() const {
+  typename vectorD<TIPO>::const_iteratorD aux;
+  aux.ite = vd.end();
+  return aux;
+}
+
+template <typename TIPO>
+typename vectorD<TIPO>::const_iterator vectorD<TIPO>::begin() const {
+  typename vectorD<TIPO>::const_iterator aux;
+  aux.i_vect = 0;
+  aux.ite_rep = vd.begin();
+  aux.el_vect = this;
+  return aux;
+}
+
+template <typename TIPO>
+typename vectorD<TIPO>::const_iterator vectorD<TIPO>::end() const {
+  typename vectorD<TIPO>::const_iterator aux;
+  aux.i_vect = n_ele;
+  aux.ite_rep = vd.end();
+  aux.el_vect = this;
+  return aux;
+}
+
+
+template <typename TIPO>
+typename vectorD<TIPO>::iteratorD vectorD<TIPO>::beginD() {
+  typename vectorD<TIPO>::iteratorD aux;
+  aux.ite = vd.begin();
+  return aux;
+}
+
+template <typename TIPO>
+typename vectorD<TIPO>::iteratorD vectorD<TIPO>::endD() {
+  typename vectorD<TIPO>::iteratorD aux;
+  aux.ite = vd.end();
+  return aux;
+}
+
+template <typename TIPO>
+typename vectorD<TIPO>::iterator vectorD<TIPO>::begin() {
+  typename vectorD<TIPO>::iterator aux;
+  
+ 
+  aux.i_vect = 0;
+  aux.ite_rep = vd.begin();
+  aux.el_vect = this;
+  return aux;
+}
+
+template <typename TIPO>
+typename vectorD<TIPO>::iterator vectorD<TIPO>::end() {
+  typename vectorD<TIPO>::iterator aux;
+  aux.i_vect = n_ele;
+  aux.ite_rep = vd.end();
+  aux.el_vect = this;
+  return aux;
+}
+
+
+
+template <typename TIPO>
+typename vectorD<TIPO>::iterator  vectorD<TIPO>::erase (  typename vectorD<TIPO>::iterator   it){
+  typename vectorD<TIPO>::iterator sal (it);
+  typename vector<pair<int,TIPO> >::iterator aux;
+  
+
+  if (it.i_vect != (*(it.ite_rep)).first)  //it apunta a un valor nulo
+    sal.ite_rep = aux = it.ite_rep;
+  else  // it apunta a un valor no nulo;
+    sal.ite_rep = aux = vd.erase(it.ite_rep); // elimino el par de vd
+  
+  while (aux!= vd.end()){  // retraso todos los valores no nulos una posicion.
+     (*aux).first--;
+     aux++;
+    }
+  n_ele--;  //decremento en 1 el tamaño del vector
+  
+
+  return sal;
+}
+ 
+template <typename TIPO>
+typename vectorD<TIPO>::iterator  vectorD<TIPO>::insert ( 
+   typename vectorD<TIPO>::iterator   it, const TIPO & x){
+
+  typename vector<pair<int,TIPO> >::iterator it_aux;  
+  typename vectorD<TIPO>::iterator sal (it) ;
+  
+
+  if (x != v_nulo){ 
+     sal.ite_rep = vd.insert(it.ite_rep, pair<int,TIPO>(it.i_vect,x) ); //inserto par en vd.
+     it_aux = sal.ite_rep;
+     it_aux++;
+     }
+  else it_aux = sal.ite_rep;
+  while ( it_aux!= vd.end() ) {
+        (*it_aux).first++;
+        it_aux++;
+       
+       } 
+  n_ele++;
+  return sal;
+}
+ 
+                
+ 

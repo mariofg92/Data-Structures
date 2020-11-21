@@ -1,0 +1,203 @@
+
+Comenzaré comparando las 2 versiones de la priority_queue_v1 y comentanto sólo las diferencias:
+
+
+
+- En el construcctor por defecto yo he supuesto que al ser los atributos privados de tipo básico y stl no
+debía de hacer ningún tipo de reserva de memoria dinámica al igual que se ha supuesto en el código que debemos tomar 
+como referencia para hacer esta autoevaluación. Sin embargo en dicho codigo se opta por inicializar mayor a -1 en el
+constructor por defecto, cosa que es preferible para evitar confusiones y que por otra parte yo no he hecho.
+
+- En la función miembro empty() yo he optado por implementarlo de la siguiente manera:
+	
+		template <typename T>
+		bool priority_queue<T>::empty() const{
+			if (V.size() == 0)
+				return true;
+			else
+				return false;
+		}
+
+	mientras que en el código de referencia se ha implementado como sigue:
+		template <typename T>
+		bool priority_queue<T>::empty() const
+		{
+ 		 return V.empty();
+		}
+
+	Aunque ambás funciones son de orden de ejecución O(1) la segunda seguramente es mas acertada debido a que posiblemente tenga
+	una constante oculta menor, además de que el código es un poco más simple.
+
+- En la función miembro top() yo he optado por implementarlo de la siguiente manera:
+
+		template <typename T>
+		const T & priority_queue<T>::top( ) const{
+			if(!empty()){
+				assert(cheq_rep());
+				return V[mayor];
+			}
+		}
+	
+	mientras que en el código de referencia se ha implementado como sigue:
+		template <typename T>
+		const T & priority_queue<T>::top() const
+		{
+  		return V[mayor];
+		}
+
+	En este punto creo que el enfoque más acertado es el que yo he usado ya que controlo las posibles situalciones "anomalas".
+	En el código de referencia si hicieramos top() y en la cola todavía no hubiesemos insertado ningún elemento la función
+	top() intentaría acceder a V[-1] lo cual produciría una violación de segmento. En el código que yo he implementado esto no 
+	ocurriría ya que dicha situación "anomala" queda controlada por "if(!empty())". Además si por cualquier motivo el mayor elemento
+	de la cola no es el que está indexado en mayor está situación anomala la controla assert(cheq_rep()).
+
+
+- En la función miembro pop() yo he optado por implementarlo de la siguiente manera:
+
+		template <typename T>
+		void priority_queue<T>::pop( ){
+			if(!empty()){
+				V.erase(V.begin()+mayor);
+				for(int i = 0; i < V.size(); i++){
+					if(V[mayor] < V[i] || i == 0) mayor = i;
+				}
+			}
+
+		}
+
+	mientras que en el código de referencia se ha implementado como sigue:
+		template <typename T>
+		void priority_queue<T>::pop()
+		{
+		  int p_mayor;
+ 		 //V.erase(V.begin()+mayor);
+		  V[mayor] = V.back();
+		  V.erase(V.begin()+V.size()-1);
+  
+		  if (!V.empty()) {
+		    p_mayor = 0;
+ 		   for (int i=1; i<V.size(); i++)
+  		    if (V[i] > V[p_mayor])
+			p_mayor = i;
+ 		 }
+ 		 else
+  		  p_mayor = -1;
+  
+ 		 mayor = p_mayor;
+		}
+	Aquí la función pop() del código de referencia controla todas los posibles casos, en mi código hay una situación
+	que podría parecer origen de errores y es cuando cola solo tiene un elemento, ya que al eliminarlo el mayor vale 0
+	y el vector en realidad está vacio. Sin embargo esto no origina ningún tipo de error ya que cuando nosotros accedemos al vector
+	lo hacemos a traves de la función top() que tal y como yo la he implementado controla el hecho de que el vector esté vacio
+	y por tanto no intentaría acceder a V[0]. Resumiendo ambos codigos son igualmente validos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Para terminar voy a realizar la comparación de las 2 versiones de la priority_queue_v2 (comentanto sólo las diferencias):
+
+- En la version V2 como atributos privados yo tenía mayor y V al igual que en la versión V1, como en esta versión el elemento mayor es siempre 
+V[0], no debería de haber dejado el indice int mayor. Por tanto como atributos privados deberia tener sólo el vector que es tal y como está en
+el codigo de referencia. Consecuencia de este mal planteamiento que yo realicé en su momento está el constructor por defecto que inicializa 
+mayor a 0.
+
+
+- En la función miembro empty() yo he optado por implementarlo de la siguiente manera:
+	
+		template <typename T>
+		bool priority_queue<T>::empty() const{
+			if (V.size() == 0)
+				return true;
+			else
+				return false;
+		}
+
+	mientras que en el código de referencia se ha implementado como sigue:
+		template <typename T>
+		bool priority_queue<T>::empty() const
+		{
+ 		 return V.empty();
+		}
+
+	Aunque ambás funciones son de orden de ejecución O(1) la segunda seguramente es mas acertada debido a que posiblemente tenga
+	una constante oculta menor, además de que el codigo es un poco más simple.
+
+
+- En la función miembro top() yo he optado por implementarlo de la siguiente manera:
+		template <typename T>
+		const T & priority_queue<T>::top( ) const{
+			if(!empty()){
+				assert(cheq_rep());
+				return V[0];
+			}
+		}
+
+	mientras que en el código de referencia se ha implementado como sigue:
+		template <typename T>
+		const T & priority_queue<T>::top() const
+		{
+		  return V.back();
+		}
+	
+	Aquí la función top() implementada en el código de referencia es más eficiente e igualmente controla todas las posibles situaciones
+	"anomalas", además seguramente las controle mejor.
+
+
+- En la función miembro push(const T & t) yo he optado por implementarlo de la siguiente manera:
+		template <typename T>
+		void priority_queue<T>::push(const T & t){ 
+			if(empty()) // Si está vacio lo añade directamente
+				V.push_back(t);
+			else{
+				int i= V.size() -1;
+				while(i>0 && V[i]<t){
+					i--;
+				}
+				if(V[i] > t)
+					V.insert(V.begin()+i+1,t);
+				else
+					V.insert(V.begin()+i,t);
+			}
+		}
+
+	mientras que en el código de referencia se ha implementado como sigue:
+		template <typename T>
+		void priority_queue<T>::push(const T & t)
+		{ 
+		  int i= 0;
+ 		 while (i<V.size() && V[i]<t)
+ 		   i++;
+  
+  		V.insert(V.begin()+i, t);
+		}
+	
+	Ambas funciones realizan correctamente su labor y controlan las posibles situaciones "anomalas" sin embargo la implementada en el codigo
+	de referencia es claramente la mejor opción ya que está implententada en menos lineas de código, es mas simple y más eficiente.
+
+
+- En la función miembro pop() yo he optado por implementarlo de la siguiente manera:
+		template <typename T>
+		void priority_queue<T>::pop( ){
+			if(!empty())
+				V.erase(V.begin());
+		}
+
+	mientras que en el código de referencia se ha implementado como sigue:
+		template <typename T>
+		void priority_queue<T>::pop()
+		{
+		  V.pop_back();
+		}
+
+	Ambas funciones realizan correctamente su labor, aunque la implementada en el codigo de referencia es un poco mejor por ser ligeramente
+	más eficiente.

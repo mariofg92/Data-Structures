@@ -1,0 +1,18 @@
+Descripcion de ficheros
+codigo_prueba.cpp  
+	 Fichero con codigo para lectura de base de datos.
+
+P5_file_rating.list 
+	Fichero con 200000 peliculas con sus respectivos ratings. Este fichero es el que debemos de utilizar
+ para construir inicialmente la estructura.
+
+P5_insert_rating.list
+        Fichero con 96498 peliculas que se deberán insertar posteriormente en la estructura.
+
+P5_delete_rating.list 
+	Fichero con 70000 peliculas que se deberán borrar.
+ Estas peliculas pertenecen al total de 296498 peliculas entregadas.
+
+rating_info
+	Fichero con informacion sobre la forma en que IMDb computa los ratings y almacena los votos.
+

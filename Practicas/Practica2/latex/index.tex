@@ -1,0 +1,98 @@
+\begin{DoxyVersion}{\-Versión}
+v0 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{\-Autor}
+\-Estructuras de \-Datos
+\end{DoxyAuthor}
+\hypertarget{index_intro_sec}{}\section{\-Introduccion}\label{index_intro_sec}
+\-En esta practica se pretende avanzar en el uso de las estructuras de datos, para ello comenzaremos con un tipo de datos simplificado que llamaremos \hyperlink{classpriority__queue}{priority\-\_\-queue}.
+
+\-Una \hyperlink{classpriority__queue}{priority\-\_\-queue} (cola\-\_\-con\-\_\-prioridad) es un contenedor que proporciona un subconjunto restringido de métodos (inserción de elementos además del borrado y consulta del elemento “mayor”). \-Se garantiza que el elemento “mayor” de la \hyperlink{classpriority__queue}{priority\-\_\-queue} se encuentra en el tope de la misma. \-Priority\-\_\-queue no permite la iteración a través de sus elementos.\hypertarget{index_example_sec}{}\section{\-Ejemplo de Uso\-:}\label{index_example_sec}
+
+\begin{DoxyCode}
+#include "priority_queue.h"
+
+priority_queue<int> q1;
+
+
+for (i=1;i<10;i++) q1.push(i);
+
+for (i=20;i>11;i--) q1.push(i);
+
+while (!q1.empty())  { // Imprime los números del 20 al 1. 
+     cout << q1.top() << " ";
+     q1.pop();   
+   }
+\end{DoxyCode}
+\hypertarget{index_Representaciones}{}\section{\-Representaciones}\label{index_Representaciones}
+\-El alumno deberá realizar dos implementaciones distintas de una cola con prioridad, utilizando como base el \-T\-D\-A vector de la \-S\-T\-L, en la primera de ellas los elementos se almacenarán sin tener en cuenta su valor mientras que en la segunda debemos garantizar que los elementos se encuentran ordenados en el vector\hypertarget{index_primera}{}\section{\-Primera Representación\-:}\label{index_primera}
+\hypertarget{index_fact_sec1}{}\subsection{\-Función de Abstracción \-:}\label{index_fact_sec1}
+\-Funcion de \-Abstraccion\-: \-A\-F\-: \-Rep =$>$ \-Abs
+
+dada qq=(vector$<$\-T$>$ \-V, int mayor) ==$>$ \hyperlink{classpriority__queue}{priority\-\_\-queue} \-P\-Q;
+
+\-Un objeto abstracto, \-Q, se instancia en la cola con prioridad pq teniendo\-:
+
+
+\begin{DoxyCode}
+ pq.V[mayor] = PQ.top()
+\end{DoxyCode}
+\hypertarget{index_inv_sec1}{}\subsection{\-Invariante de la Representación\-:}\label{index_inv_sec1}
+\-Propiedades que debe cumplir cualquier objeto
+
+
+\begin{DoxyCode}
+pq.size() == pq.V.size();
+
+Para todo i, 0 <= i < pq.V.size() se cumple
+pq.V[mayor] >= pq.V[i];
+\end{DoxyCode}
+\hypertarget{index_segunda}{}\section{\-Segunda Representación\-:}\label{index_segunda}
+\-En este caso, la representación que se utiliza es un vector ordenado de elementos \hypertarget{index_fact_sec2}{}\subsection{\-Función de Abstracción \-:}\label{index_fact_sec2}
+\-Funcion de \-Abstraccion\-: \-A\-F\-: \-Rep =$>$ \-Abs
+
+dada qq=(vector$<$\-T$>$ \-V) ==$>$ \hyperlink{classpriority__queue}{priority\-\_\-queue} \-P\-Q;
+
+\-Un objeto abstracto, \-Q, se instancia en la cola con prioridad pq teniendo\-:
+
+
+\begin{DoxyCode}
+ pq.V[0] = PQ.top()
+\end{DoxyCode}
+\hypertarget{index_inv_sec2}{}\subsection{\-Invariante de la Representación\-:}\label{index_inv_sec2}
+\-Propiedades que debe cumplir cualquier objeto
+
+
+\begin{DoxyCode}
+pq.size() == pq.V.size();
+
+Para todo i, 0 <= i < pq.V.size()-1 se cumple
+pq.V[i] >= pq.V[i+1];
+\end{DoxyCode}
+ \hypertarget{index_sec_tar}{}\section{\-Tareas a Realizar.}\label{index_sec_tar}
+\-Se pide implementar las dos representaciones del \-T\-D\-A \hyperlink{classpriority__queue}{priority\-\_\-queue} y analizar la eficiencia del siguiente código que permite ordenar un vector de elementos.
+
+\-Para ello se puede utilizar el código que se ha proporcionado en la práctica 1.
+
+
+\begin{DoxyCode}
+// Ordena un vector de string en orden creciente 
+//@param[in,out] V vector a ordenar
+//
+void ordenar(vector<string> & V){
+
+ priority_queue aux;
+ int pos;
+
+ for (int i=0;i<V.size(); i++)
+   aux.push(V[i]);
+
+ pos = V.size()-1;
+ while (!aux.empty()) {
+   V[pos]=aux.top();
+   aux.pop();
+   pos--;
+ }
+}
+\end{DoxyCode}
+ 
